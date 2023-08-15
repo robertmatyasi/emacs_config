@@ -649,11 +649,15 @@ point reaches the beginning or end of the buffer, stop there."
 ;; PROGRAMMING
 
 
+;; Display line numbers and columns when programming
+(add-hook 'prog-mode-hook (lambda ()
+                            (display-line-numbers-mode 1)
+                            (column-number-mode 1)))
+
+
 (use-package yaml-mode)
 (use-package haml-mode)
 
-
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 ;; Web-mode is an autonomous emacs major-mode for editing web templates.
 ;; HTML documents can embed parts (CSS / JavaScript) and blocks (client / server side).
