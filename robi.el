@@ -156,6 +156,15 @@
 ;; VISUALS
 
 
+;; Start the initial frame on the left.
+(add-to-list 'initial-frame-alist '(left . 1))
+
+
+;; Start every frame full height, 90 columns wide.
+(add-to-list 'default-frame-alist '(fullscreen . fullheight))
+(add-to-list 'default-frame-alist '(width . 90))
+
+
 ;; Use a hook so the message doesn't get clobbered by other messages.
 (add-hook 'emacs-startup-hook
           (lambda ()
@@ -207,6 +216,7 @@
 
 ;; No fringe please.
 (set-face-attribute 'fringe nil :background nil)
+
 
 ;; Show parens and other pairs.
 (use-package smartparens
@@ -278,13 +288,6 @@
 
 ;; Disable blinking cursor.
 (blink-cursor-mode 0)
-
-
-;; Better initial window size and placement.
-
-(when window-system
-  (set-frame-position (selected-frame) 0 0)
-  (set-frame-size (selected-frame) 90 100))
 
 
 ;; ================
@@ -636,6 +639,10 @@ point reaches the beginning or end of the buffer, stop there."
 (use-package define-word
   :config
   (global-set-key (kbd "M-\\") 'define-word-at-point))
+
+
+;; Fix for truncated definition minibuffers
+(setq max-mini-window-height 0.5)
 
 
 ;; ===========
