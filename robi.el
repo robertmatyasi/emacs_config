@@ -1,4 +1,5 @@
 ;;; -*- lexical-binding: t -*-
+;; Many ideas from: https://github.com/freetonik/castlemacs
 
 
 ;; ====
@@ -38,7 +39,7 @@
   (exec-path-from-shell-initialize))
 
 
-;; Store custom-file separately, don't freak out when it's not found
+;; Store custom-file separately, don't freak out when it's not found.
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
@@ -47,12 +48,12 @@
 ;; MODIFIER KEYS
 
 
-;; Both command keys are 'Super'
+;; Both command keys are 'Super'.
 (setq mac-right-command-modifier 'super)
 (setq mac-command-modifier 'super)
 
 
-;; Option or Alt is naturally 'Meta'
+;; Option or Alt is naturally 'Meta'.
 (setq mac-option-modifier 'meta)
 
 
@@ -64,7 +65,7 @@
 ;; SANE DEFAULTS
 
 
-;; Smoother and nicer scrolling
+;; Smoother and nicer scrolling.
 (setq scroll-margin 10
    scroll-step 1
    next-line-add-newlines nil
@@ -75,7 +76,7 @@
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 
 
-;; Use ESC as universal get me out of here command
+;; Use ESC as universal get me out of here command.
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
 
@@ -182,29 +183,29 @@
 (load-theme 'tsdh-light)
 
 
-;; Pretty icons
+;; Pretty icons...
 (use-package all-the-icons)
 ;; MUST DO M-x all-the-icons-install-fonts after
 
 
-;; ... for neotree as well
+;; ... for neotree as well.
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 
-;; Hide toolbar and scroll bar
+;; Hide toolbar and scroll bar.
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
 
-;; Always wrap lines
+;; Always wrap lines.
 (global-visual-line-mode 1)
 
 
-;; Highlight current line
+;; Highlight current line.
 (global-hl-line-mode 1)
 
 
-;; No fringe please
+;; No fringe please.
 (set-face-attribute 'fringe nil :background nil)
 
 ;; Show parens and other pairs.
@@ -216,19 +217,19 @@
   (show-smartparens-global-mode t))
 
 
-;; Hide minor modes from modeline
+;; Hide minor modes from modeline.
 (use-package rich-minority
   :config
   (rich-minority-mode 1)
   (setf rm-blacklist ""))
 
 
-;; Set colors to distinguish between active and inactive windows
+;; Set colors to distinguish between active and inactive windows.
 (set-face-attribute 'mode-line nil :background "SlateGray1")
 (set-face-attribute 'mode-line-inactive nil :background "grey93")
 
 
-;; File tree
+;; File tree.
 (use-package neotree
   :config
   (setq neo-window-width 32
@@ -268,7 +269,7 @@
 (setq-default c-basic-indent 2)
 
 
-;; Show keybindings cheatsheet
+;; Show keybindings cheatsheet.
 (use-package which-key
   :config
   (which-key-mode)
@@ -279,7 +280,7 @@
 (blink-cursor-mode 0)
 
 
-;; Better initial window size and placement
+;; Better initial window size and placement.
 
 (when window-system
   (set-frame-position (selected-frame) 0 0)
@@ -417,7 +418,7 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key (kbd "s-/") 'comment-line)
 
 
-;; Visually find and replace text
+;; Visually find and replace text.
 (use-package visual-regexp
   :config
   (define-key global-map (kbd "M-s-f") 'vr/replace)
@@ -438,7 +439,7 @@ point reaches the beginning or end of the buffer, stop there."
 ;; WINDOW MANAGEMENT
 
 
-;; When split is automatic, always split windows vertically
+;; When split is automatic, always split windows vertically.
 (setq split-height-threshold 0)
 (setq split-width-threshold nil)
 
@@ -467,7 +468,7 @@ point reaches the beginning or end of the buffer, stop there."
   (global-set-key (kbd "s-}")  'windmove-down))        ;; Cmd+Shift+] got to down window
 
 
-;; Enable winner mode to quickly restore window configurations
+;; Enable winner mode to quickly restore window configurations.
 (winner-mode 1)
 (global-set-key (kbd "M-s-[") 'winner-undo)
 (global-set-key (kbd "M-s-]") 'winner-redo)
@@ -515,7 +516,7 @@ point reaches the beginning or end of the buffer, stop there."
   (global-set-key (kbd "s-f") 'swiper)) ;; Cmd+f find text
 
 
-;; Better menus with Counsel (a layer on top of Ivy)
+;; Better menus with Counsel (a layer on top of Ivy).
 (use-package counsel
   :config
   (global-set-key (kbd "M-x") 'counsel-M-x)            ;; Alt+x run command
@@ -535,7 +536,7 @@ point reaches the beginning or end of the buffer, stop there."
   (setq ivy-rich-path-style 'abbrev)) ;; Abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
 
 
-;; Integrate Projectile with Counsel
+;; Integrate Projectile with Counsel.
 (use-package counsel-projectile
   :config
   (counsel-projectile-mode 1)
@@ -551,13 +552,13 @@ point reaches the beginning or end of the buffer, stop there."
 ;; VERSION CONTROL WITH GIT
 
 
-;; Magit
+;; Magit.
 (use-package magit
   :config
   (global-set-key (kbd "s-g") 'magit-status))   ;; Cmd+g for git status
 
 
-;; Show changes in the gutter
+;; Show changes in the gutter.
 (use-package git-gutter
   :diminish
   :config
@@ -603,7 +604,7 @@ point reaches the beginning or end of the buffer, stop there."
 (setq ispell-program-name "aspell")
 
 
-;; Popup window for spellchecking
+;; Popup window for spellchecking.
 (use-package flyspell-correct)
 (use-package flyspell-correct-popup)
 
@@ -620,18 +621,18 @@ point reaches the beginning or end of the buffer, stop there."
      (define-key flyspell-mouse-map [mouse-3] #'undefined)))
 
 
-;; Spellcheck current word
+;; Spellcheck current word.
 (define-key flyspell-mode-map (kbd "s-\\") 'flyspell-correct-previous) ;; Cmd+\ spellcheck word with popup
 (define-key flyspell-mode-map (kbd "C-s-\\") 'ispell-word)                          ;; Ctrl+Cmd+\ spellcheck word using built UI
 
 
-;; Search for synonyms
+;; Search for synonyms.
 (use-package powerthesaurus
   :config
   (global-set-key (kbd "s-|") 'powerthesaurus-lookup-word-dwim)) ;; Cmd+Shift+\ search thesaurus
 
 
-;; Word definition search
+;; Word definition search.
 (use-package define-word
   :config
   (global-set-key (kbd "M-\\") 'define-word-at-point))
@@ -681,7 +682,7 @@ point reaches the beginning or end of the buffer, stop there."
 ;; ORG MODE
 
 
-;; Some basic Org defaults
+;; Some basic Org defaults.
 (use-package org
   :config
   (setq org-startup-indented t)         ;; Visually indent sections. This looks better for smaller files.
@@ -713,7 +714,7 @@ point reaches the beginning or end of the buffer, stop there."
 ;; Academic
 
 
-;; Markdown writing environment
+;; Markdown writing environment.
 (use-package markdown-mode)
 (use-package olivetti)
 (add-hook 'markdown-mode-hook (lambda ()
@@ -725,21 +726,21 @@ point reaches the beginning or end of the buffer, stop there."
           ))
 
 
-;; .mdh is markdown
+;; .mdh is markdown.
 (add-to-list 'auto-mode-alist '("\\.mdh\\'" . markdown-mode))
 
 
-;; Pandoc mode + fix for error
+;; Pandoc mode.
 (use-package pandoc-mode)
 (setq pandoc-process-connection-type nil)
 
 
 ;; Use count-words instead of count-words-region as it works on buffer
-;; if no region is selected
+;; if no region is selected.
 (global-set-key (kbd "M-=") 'count-words)
 
 
-;; Bibtex auto-complete
+;; Bibtex auto-complete.
 (use-package ivy-bibtex)
 (setq bibtex-completion-bibliography
       '("/Users/robi/Dropbox/code/pandocfiles/zotero.bib"))
