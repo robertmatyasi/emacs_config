@@ -189,7 +189,8 @@
 
 
 ;; Nice and simple default theme.
-(load-theme 'tsdh-light)
+(use-package color-theme-sanityinc-tomorrow)
+(load-theme 'sanityinc-tomorrow-night)
 
 
 ;; Pretty icons...
@@ -233,8 +234,8 @@
 
 
 ;; Set colors to distinguish between active and inactive windows.
-(set-face-attribute 'mode-line nil :background "SlateGray1")
-(set-face-attribute 'mode-line-inactive nil :background "grey93")
+;; (set-face-attribute 'mode-line nil :background "SlateGray1")
+;; (set-face-attribute 'mode-line-inactive nil :background "grey93")
 
 
 ;; File tree.
@@ -257,9 +258,9 @@
 
 
 ;; Show vi-like tilde in the fringe on empty lines.
-(use-package vi-tilde-fringe
-  :config
-  (global-vi-tilde-fringe-mode 1))
+;; (use-package vi-tilde-fringe
+  ;; :config
+  ;; (global-vi-tilde-fringe-mode 1))
 
 
 ;; Show full path in the title bar.
