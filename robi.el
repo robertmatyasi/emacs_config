@@ -188,18 +188,16 @@
 (setq-default line-spacing 2)
 
 
-;; Nice and simple default light theme.
+;; Nice and simple default theme.
 (load-theme 'tsdh-light)
 
 
 ;; Pretty icons...
-(use-package all-the-icons)
+(use-package all-the-icons
+  :if (display-graphic-p))
 ;; MUST DO M-x all-the-icons-install-fonts after
-
-
-;; ... for neotree as well.
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-
+(use-package all-the-icons-dired)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 ;; Hide toolbar and scroll bar.
 (tool-bar-mode -1)
@@ -253,7 +251,7 @@
         neo-show-hidden-files t
         neo-mode-line-type 'none
         neo-auto-indent-point t)
-  (setq neo-theme (if (display-graphic-p) 'nerd 'arrow))
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-hidden-regexp-list '("venv" "\\.pyc$" "~$" "\\.git" "__pycache__" ".DS_Store"))
   (global-set-key (kbd "s-B") 'neotree-toggle))           ;; Cmd+Shift+b toggle tree
 
@@ -510,6 +508,8 @@ point reaches the beginning or end of the buffer, stop there."
   (global-set-key (kbd "s-b") 'ivy-switch-buffer)  ;; Cmd+b show buffers and recent files
   (global-set-key (kbd "M-s-b") 'ivy-resume))      ;; Alt+Cmd+b resume whatever Ivy was doing
 
+(use-package all-the-icons-ivy
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
 
 ;; Swiper is a better local finder.
 (use-package swiper
@@ -713,7 +713,10 @@ point reaches the beginning or end of the buffer, stop there."
 (setq org-agenda-files '("~/org"))
 
 
-;; Open config file by pressing C-x and then c
+;; ======
+;; CONFIG
+
+;; Open this file by pressing C-x and then c
 (global-set-key (kbd "C-x c") (lambda () (interactive) (find-file "~/Dropbox/code/emacs_config/robi.el")))
 
 
@@ -721,8 +724,8 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key (kbd "C-x C") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 
 
-;; ================
-;; Academic
+;; ========
+;; ACADEMIC
 
 
 ;; Markdown writing environment.
