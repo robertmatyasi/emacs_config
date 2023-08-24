@@ -155,14 +155,12 @@
 ;; =======
 ;; VISUALS
 
-
-;; Start the initial frame on the left.
-(add-to-list 'initial-frame-alist '(left . 1))
-
-
-;; Start every frame full height, 90 columns wide.
-(add-to-list 'default-frame-alist '(fullscreen . fullheight))
-(add-to-list 'default-frame-alist '(width . 90))
+;; Start the initial frame maximized
+(setq initial-frame-alist
+       '((height . 1.0)
+         (width . 1.0)
+         (left . 1)
+         (top . 1)))
 
 
 ;; Use a hook so the message doesn't get clobbered by other messages.
