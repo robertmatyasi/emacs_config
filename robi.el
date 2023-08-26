@@ -155,12 +155,10 @@
 ;; =======
 ;; VISUALS
 
+
 ;; Start the initial frame maximized
 (setq initial-frame-alist
-       '((height . 1.0)
-         (width . 1.0)
-         (left . 1)
-         (top . 1)))
+      '((top . 0) (left . 0) (width . 1.0) (height . 1.0)))
 
 
 ;; Use a hook so the message doesn't get clobbered by other messages.
@@ -176,7 +174,7 @@
 ;; Enable transparent title bar on macOS
 ;; See https://github.com/railwaycat/homebrew-emacsmacport/wiki/Natural-Title-Bar
 (when (memq window-system '(mac ns))
-  (add-to-list 'default-frame-alist '(ns-appearance . light)) ;; {light, dark}
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; {light, dark}
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
 
 
@@ -191,12 +189,16 @@
 (load-theme 'sanityinc-tomorrow-night)
 
 
-;; Pretty icons...
+;; Icons.
+;; MUST DO M-x all-the-icons-install-fonts after
 (use-package all-the-icons
   :if (display-graphic-p))
-;; MUST DO M-x all-the-icons-install-fonts after
+
+
+;; Show icons in dired mode.
 (use-package all-the-icons-dired)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
 
 ;; Hide toolbar and scroll bar.
 (tool-bar-mode -1)
@@ -509,6 +511,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 (use-package all-the-icons-ivy
   :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
+
 
 ;; Swiper is a better local finder.
 (use-package swiper
