@@ -242,6 +242,7 @@
 (use-package neotree
   :config
   (setq neo-window-width 32
+        neo-autorefresh t ;; NeoTree follows along
         neo-create-file-auto-open t
         neo-banner-message nil
         neo-show-updir-line t
