@@ -616,6 +616,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 
 ;; Enable spellcheck on the fly for all text modes. This includes org, latex and LaTeX.
+(add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'text-mode-hook 'flyspell-buffer)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
