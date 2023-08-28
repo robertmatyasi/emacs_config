@@ -152,6 +152,11 @@
 (setq ring-bell-function 'ignore)
 
 
+;; Fix GUI freezing when hitting C-z.
+;; (Still freezes when M-x suspend frame.)
+(global-unset-key (kbd "C-z"))
+
+
 ;; =======
 ;; VISUALS
 
@@ -716,6 +721,17 @@ point reaches the beginning or end of the buffer, stop there."
 ;; And all of those files should be in included agenda.
 (setq org-agenda-files '("~/org"))
 
+
+;; JS evaluation from org source blocks.
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((js . t)))
+
+
+;; Script mode for js babel output.
+;; This will show terminal output in the results (i.e., do not evaluate js block as a function).
+(setq org-babel-default-header-args:js
+      '((:results . "output")))
 
 ;; ======
 ;; CONFIG
