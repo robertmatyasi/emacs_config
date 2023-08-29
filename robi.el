@@ -32,7 +32,9 @@
 (setq use-package-always-ensure t)
 
 
-;; Pass system shell environment to Emacs. This is important primarily for shell inside Emacs, but also things like Org mode export to Tex PDF don't work, since it relies on running external command pdflatex, which is loaded from PATH.
+;; Pass system shell environment to Emacs.
+;; This is important primarily for shell inside Emacs, but also things like Org mode export to Tex PDF don't work,
+;; since it relies on running external command pdflatex, which is loaded from PATH.
 (use-package exec-path-from-shell
   :ensure t)
 (when (memq window-system '(mac ns))
@@ -219,7 +221,7 @@
 
 
 ;; No fringe please.
-(set-face-attribute 'fringe nil :background nil)
+(set-face-attribute 'fringe nil :background 'unspecified)
 
 
 ;; Show parens and other pairs.
@@ -354,8 +356,8 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Many commands in Emacs write the current position into mark ring.
 ;; These custom functions allow for quick movement backward and forward.
-;; For example, if you were editing line 6, then did a search with Cmd+f, did something and want to come back,
-;; press Cmd+, to go back to line 6. Cmd+. to go forward.
+;; For example, if you were editing line 6, then did a search with Cmd+f,
+;; did something and want to come back, press Cmd+, to go back to line 6. Cmd+. to go forward.
 ;; These keys are chosen because they are the same buttons as < and >, think of them as arrows.
 (defun my-pop-local-mark-ring ()
   (interactive)
@@ -540,7 +542,8 @@ point reaches the beginning or end of the buffer, stop there."
 (use-package avy)   ;; enable avy for quick navigation
 
 
-;; Make Ivy a bit more friendly by adding information to ivy buffers, e.g. description of commands in Alt-x, meta info when switching buffers, etc.
+;; Make Ivy a bit more friendly by adding information to ivy buffers,
+;; e.g. description of commands in Alt-x, meta info when switching buffers, etc.
 (use-package ivy-rich
   :config
   (ivy-rich-mode 1)
@@ -611,7 +614,9 @@ point reaches the beginning or end of the buffer, stop there."
 ;; SPELLCHECKING AND THESAURUS
 
 
-;; Spellchecking requires an external command to be available. Install aspell on your Mac, then make it the default checker for Emacs' ispell. Note that personal dictionary is located at ~/.aspell.LANG.pws by default.
+;; Spellchecking requires an external command to be available. Install aspell on your Mac,
+;; then make it the default checker for Emacs' ispell.
+;; Note that personal dictionary is located at ~/.aspell.LANG.pws by default.
 (setq ispell-program-name "aspell")
 
 
@@ -635,7 +640,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Spellcheck current word.
 (define-key flyspell-mode-map (kbd "s-\\") 'flyspell-correct-previous) ;; Cmd+\ spellcheck word with popup
-(define-key flyspell-mode-map (kbd "C-s-\\") 'ispell-word)                          ;; Ctrl+Cmd+\ spellcheck word using built UI
+(define-key flyspell-mode-map (kbd "C-s-\\") 'ispell-word)  ;; Ctrl+Cmd+\ spellcheck word using built UI
 
 
 ;; Search for synonyms.
