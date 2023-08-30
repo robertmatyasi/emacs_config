@@ -255,7 +255,6 @@
         neo-show-updir-line t
         neo-window-fixed-size nil
         neo-vc-integration nil
-        neo-mode-line-type 'neotree
         neo-smart-open t
         neo-show-hidden-files t
         neo-mode-line-type 'none
@@ -265,10 +264,14 @@
   (global-set-key (kbd "s-B") 'neotree-toggle))           ;; Cmd+Shift+b toggle tree
 
 
-;; Show vi-like tilde in the fringe on empty lines.
-;; (use-package vi-tilde-fringe
-  ;; :config
-  ;; (global-vi-tilde-fringe-mode 1))
+;; Don't wrap long filenames in file tree.
+(add-hook 'neo-after-create-hook
+   #'(lambda (_)
+       (with-current-buffer (get-buffer neo-buffer-name)
+         (setq truncate-lines t)
+         (setq word-wrap nil)
+         (make-local-variable 'auto-hscroll-mode)
+         (setq auto-hscroll-mode nil))))
 
 
 ;; Show full path in the title bar.
