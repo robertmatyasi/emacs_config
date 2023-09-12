@@ -99,16 +99,15 @@
 (global-auto-revert-mode t)
 
 (setq
- inhibit-startup-message t         ; Don't show the startup message...
- inhibit-startup-screen t          ; ... or screen
- cursor-in-non-selected-windows t  ; Hide the cursor in inactive windows
-
- echo-keystrokes 0.1               ; Show keystrokes right away, don't show the message in the scratch buffer
- initial-scratch-message nil       ; Empty scratch buffer
- initial-major-mode 'org-mode      ; Org mode by default
- sentence-end-double-space nil     ; Sentences should end in one space, come on!
- confirm-kill-emacs 'y-or-n-p      ; y and n instead of yes and no when quitting
- help-window-select t              ; Select help window so it's easy to quit it with 'q'
+ inhibit-startup-message t              ; Don't show the startup message...
+ inhibit-startup-screen t               ; ... or screen
+ cursor-in-non-selected-windows t       ; Hide the cursor in inactive windows
+ echo-keystrokes 0.1                    ; Show keystrokes right away, don't show the message in the scratch buffer
+ initial-scratch-message nil            ; Empty scratch buffer
+ initial-major-mode 'org-mode           ; Org mode by default
+ sentence-end-double-space nil          ; Sentences should end in one space, come on!
+ confirm-kill-emacs 'y-or-n-p           ; y and n instead of yes and no when quitting
+ help-window-select t                   ; Select help window so it's easy to quit it with 'q'
 )
 
 (fset 'yes-or-no-p 'y-or-n-p)      ; y and n instead of yes and no everywhere else
@@ -179,21 +178,24 @@
 
 
 ;; Enable transparent title bar on macOS
-;; See https://github.com/railwaycat/homebrew-emacsmacport/wiki/Natural-Title-Bar
-(when (memq window-system '(mac ns))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; {light, dark}
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
+;; See a https://github.com/railwaycat/homebrew-emacsmacport/wiki/Natural-Title-Bar
 
 
 ;; Font
-(when (member "Menlo" (font-family-list))
-  (set-face-attribute 'default nil :font "Menlo 14"))
+(when (member "SF Mono" (font-family-list))
+  (set-face-attribute 'default nil :font "SF Mono-14"))
 (setq-default line-spacing 2)
 
 
 ;; Nice and simple default theme.
 (use-package color-theme-sanityinc-tomorrow)
 (load-theme 'sanityinc-tomorrow-night)
+;; (load-theme 'tsdh-light)
+
+
+;; Set colors to distinguish between active and inactive windows.
+;; (set-face-attribute 'mode-line nil :background "SlateGray1")
+;; (set-face-attribute 'mode-line-inactive nil :background "grey93")
 
 
 ;; Icons.
@@ -238,11 +240,6 @@
   :config
   (rich-minority-mode 1)
   (setf rm-blacklist ""))
-
-
-;; Set colors to distinguish between active and inactive windows.
-;; (set-face-attribute 'mode-line nil :background "SlateGray1")
-;; (set-face-attribute 'mode-line-inactive nil :background "grey93")
 
 
 ;; File tree.
@@ -520,9 +517,6 @@ point reaches the beginning or end of the buffer, stop there."
   (global-set-key (kbd "s-b") 'ivy-switch-buffer)  ;; Cmd+b show buffers and recent files
   (global-set-key (kbd "M-s-b") 'ivy-resume))      ;; Alt+Cmd+b resume whatever Ivy was doing
 
-(use-package all-the-icons-ivy
-  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
-
 
 ;; Swiper is a better local finder.
 (use-package swiper
@@ -540,6 +534,7 @@ point reaches the beginning or end of the buffer, stop there."
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)  ;; Replace built-in Emacs 'find file' (open file) with Counsel
   (global-set-key (kbd "s-o") 'counsel-find-file))     ;; Cmd+o open file
 
+
 (use-package smex)  ;; show recent commands when invoking Alt-x (or Cmd+Shift+p)
 (use-package flx)   ;; enable fuzzy matching
 (use-package avy)   ;; enable avy for quick navigation
@@ -547,6 +542,8 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Make Ivy a bit more friendly by adding information to ivy buffers,
 ;; e.g. description of commands in Alt-x, meta info when switching buffers, etc.
+(use-package all-the-icons-ivy-rich
+  :init (all-the-icons-ivy-rich-mode 1))
 (use-package ivy-rich
   :config
   (ivy-rich-mode 1)
@@ -764,7 +761,9 @@ point reaches the beginning or end of the buffer, stop there."
 				  (pandoc-mode)
           (olivetti-mode t)
           (setq olivetti-style 'fancy)
-          (olivetti-set-width 80)
+          (buffer-face-set '(:family "iA Writer Duospace"))
+          (olivetti-set-width 75)
+          (setq line-spacing 0.5)
           ))
 
 
