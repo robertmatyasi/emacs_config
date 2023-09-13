@@ -759,11 +759,11 @@ point reaches the beginning or end of the buffer, stop there."
 (add-hook 'markdown-mode-hook (lambda ()
           (setq markdown-footnote-location 'immediately)
 				  (pandoc-mode)
+          (buffer-face-set '(:family "iA Writer Duospace"))
+          (setq line-spacing 0.5)
           (olivetti-mode t)
           (setq olivetti-style 'fancy)
-          (buffer-face-set '(:family "iA Writer Duospace"))
           (olivetti-set-width 75)
-          (setq line-spacing 0.5)
           ))
 
 
