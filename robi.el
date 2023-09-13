@@ -181,9 +181,12 @@
 ;; See a https://github.com/railwaycat/homebrew-emacsmacport/wiki/Natural-Title-Bar
 
 
-;; Font
+;; Fonts
 (when (member "SF Mono" (font-family-list))
-  (set-face-attribute 'default nil :font "SF Mono-14"))
+  (set-face-attribute 'default nil :font "SF Mono-14")
+  (set-face-attribute 'fixed-pitch nil :font "SF Mono-14"))
+(when (member "iA Writer Quattro V" (font-family-list))
+  (set-face-attribute 'variable-pitch nil :font "iA Writer Quattro V-15"))
 (setq-default line-spacing 2)
 
 
@@ -759,7 +762,7 @@ point reaches the beginning or end of the buffer, stop there."
 (add-hook 'markdown-mode-hook (lambda ()
           (setq markdown-footnote-location 'immediately)
 				  (pandoc-mode)
-          (buffer-face-set '(:family "iA Writer Duo V"))
+          (variable-pitch-mode)
           (setq line-spacing 0.5)
           (olivetti-mode t)
           (setq olivetti-style 'fancy)
