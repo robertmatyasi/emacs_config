@@ -188,14 +188,14 @@
 
 
 ;; Nice and simple default theme.
-(use-package color-theme-sanityinc-tomorrow)
-(load-theme 'sanityinc-tomorrow-night)
-;; (load-theme 'tsdh-light)
+;; (use-package color-theme-sanityinc-tomorrow)
+;; (load-theme 'sanityinc-tomorrow-night)
+(load-theme 'tsdh-light)
 
 
 ;; Set colors to distinguish between active and inactive windows.
-;; (set-face-attribute 'mode-line nil :background "SlateGray1")
-;; (set-face-attribute 'mode-line-inactive nil :background "grey93")
+(set-face-attribute 'mode-line nil :background "SlateGray1")
+(set-face-attribute 'mode-line-inactive nil :background "grey93")
 
 
 ;; Icons.
@@ -759,7 +759,7 @@ point reaches the beginning or end of the buffer, stop there."
 (add-hook 'markdown-mode-hook (lambda ()
           (setq markdown-footnote-location 'immediately)
 				  (pandoc-mode)
-          (buffer-face-set '(:family "iA Writer Duospace"))
+          (buffer-face-set '(:family "iA Writer Duo V"))
           (setq line-spacing 0.5)
           (olivetti-mode t)
           (setq olivetti-style 'fancy)
