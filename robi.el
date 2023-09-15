@@ -104,7 +104,7 @@
  cursor-in-non-selected-windows t       ; Hide the cursor in inactive windows
  echo-keystrokes 0.1                    ; Show keystrokes right away, don't show the message in the scratch buffer
  initial-scratch-message nil            ; Empty scratch buffer
- initial-major-mode 'org-mode           ; Org mode by default
+ initial-major-mode 'fundamental-mode   ; Fundamental mode by default
  sentence-end-double-space nil          ; Sentences should end in one space, come on!
  confirm-kill-emacs 'y-or-n-p           ; y and n instead of yes and no when quitting
  help-window-select t                   ; Select help window so it's easy to quit it with 'q'
@@ -185,20 +185,24 @@
 (when (member "SF Mono" (font-family-list))
   (set-face-attribute 'default nil :font "SF Mono-14")
   (set-face-attribute 'fixed-pitch nil :font "SF Mono-14"))
+;; Custom variable-pitch style font, mainly for markdown mode.
 (when (member "iA Writer Quattro V" (font-family-list))
-  (set-face-attribute 'variable-pitch nil :font "iA Writer Quattro V-15"))
+  (set-face-attribute 'variable-pitch nil :font "iA Writer Quattro V-14"))
+;; 2 pixels additional space between lines.
 (setq-default line-spacing 2)
 
 
 ;; Nice and simple default theme.
-;; (use-package color-theme-sanityinc-tomorrow)
-;; (load-theme 'sanityinc-tomorrow-night)
-(load-theme 'tsdh-light)
-
+;; Light theme:
+;; (load-theme 'tsdh-light)
+;; Dark theme:
+(use-package nord-theme)
+(load-theme 'nord)
 
 ;; Set colors to distinguish between active and inactive windows.
-(set-face-attribute 'mode-line nil :background "SlateGray1")
-(set-face-attribute 'mode-line-inactive nil :background "grey93")
+;; Comment out for dark-theme.
+;; (set-face-attribute 'mode-line nil :background "SlateGray1")
+;; (set-face-attribute 'mode-line-inactive nil :background "grey93")
 
 
 ;; Icons.
@@ -719,7 +723,8 @@ point reaches the beginning or end of the buffer, stop there."
   (setq org-log-into-drawer t)          ;; State changes for todos and also notes should go into a Logbook drawer
   (setq org-src-fontify-natively t)     ;; Code highlighting in code blocks
   (setq org-log-done 'time)             ;; Add closed date when todo goes to DONE state
-  (setq org-support-shift-select t))    ;; Allow shift selection with arrows.
+  (setq org-support-shift-select t)    ;; Allow shift selection with arrows.
+  ())
 
 
 ;; Store all my org files in ~/org.
@@ -766,12 +771,8 @@ point reaches the beginning or end of the buffer, stop there."
           (setq line-spacing 0.5)
           (olivetti-mode t)
           (setq olivetti-style 'fancy)
-          (olivetti-set-width 75)
+          (olivetti-set-width 65)
           ))
-
-
-;; .mdh is markdown.
-(add-to-list 'auto-mode-alist '("\\.mdh\\'" . markdown-mode))
 
 
 ;; Pandoc mode.
